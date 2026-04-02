@@ -7,33 +7,31 @@ import '_example_document.dart';
 
 void main() {
   test("图文", () {
-    var mutableDocument = MutableDocument(
-        nodes: [
-          ParagraphNode(
-            id: DocumentEditor.createNodeId(),
-            metadata: {'blockType': blockquoteAttribution},
-            text: AttributedText(
-              text: "测试文本",
-            ),
-          ),
-          ParagraphNode(
-            id: DocumentEditor.createNodeId(),
-            metadata: {'blockType': blockquoteAttribution},
-            text: AttributedText(
-              text: "测试文本",
-            ),
-          ),
-          ImageNode(
-            id: "1",
-            imageUrl: 'https://i.ibb.co/5nvRdx1/flutter-horizon.png',
-            altText: "Image",
-            metadata: const SingleColumnLayoutComponentStyles(
-              width: double.infinity,
-              padding: EdgeInsets.zero,
-            ).toMetadata(),
-          )
-        ]
-    );
+    var mutableDocument = MutableDocument(nodes: [
+      ParagraphNode(
+        id: Editor.createNodeId(),
+        metadata: const {'blockType': blockquoteAttribution},
+        text: AttributedText(
+          "测试文本",
+        ),
+      ),
+      ParagraphNode(
+        id: Editor.createNodeId(),
+        metadata: const {'blockType': blockquoteAttribution},
+        text: AttributedText(
+          "测试文本",
+        ),
+      ),
+      ImageNode(
+        id: "1",
+        imageUrl: 'https://i.ibb.co/5nvRdx1/flutter-horizon.png',
+        altText: "Image",
+        metadata: const SingleColumnLayoutComponentStyles(
+          width: double.infinity,
+          padding: EdgeInsets.zero,
+        ).toMetadata(),
+      )
+    ]);
     var json = mutableDocument.toJson();
     print("==========图文排版==========");
     print(json);
@@ -42,11 +40,11 @@ void main() {
 
   test("自定义颜色属性测试", () {
     var paragraphNode = ParagraphNode(
-      id: DocumentEditor.createNodeId(),
-      metadata: {'blockType': blockquoteAttribution},
+      id: Editor.createNodeId(),
+      metadata: const {'blockType': blockquoteAttribution},
       text: AttributedText(
-          text: "测试文本",
-          spans: AttributedSpans(attributions: [
+          "测试文本",
+          AttributedSpans(attributions: [
             SpanMarker(
                 attribution: _ColorAttribution(Colors.red),
                 offset: 0,
@@ -101,10 +99,9 @@ void main() {
 
   test("Task 测试", () {
     var taskNode = TaskNode(
-      id: DocumentEditor.createNodeId(),
+      id: Editor.createNodeId(),
       isComplete: true,
       text: AttributedText(
-        text:
         'Create and configure your document, for example, by creating a new MutableDocument.',
       ),
     );
@@ -120,18 +117,12 @@ void main() {
 
   test("有序列表 序列化测试", () {
     var listItemNode = ListItemNode.ordered(
-      id: DocumentEditor.createNodeId(),
+      id: Editor.createNodeId(),
       text: AttributedText(
-          text: '有序列表1',
-          spans: AttributedSpans(attributions: const [
-            SpanMarker(
-                attribution: boldAttribution,
-                offset: 0,
-                markerType: SpanMarkerType.start),
-            SpanMarker(
-                attribution: boldAttribution,
-                offset: 3,
-                markerType: SpanMarkerType.end),
+          '有序列表1',
+          AttributedSpans(attributions: const [
+            SpanMarker(attribution: boldAttribution, offset: 0, markerType: SpanMarkerType.start),
+            SpanMarker(attribution: boldAttribution, offset: 3, markerType: SpanMarkerType.end),
           ])),
     );
     var json = listItemNode.toJson();
@@ -145,24 +136,20 @@ void main() {
 
   test("无序列表 序列化测试", () {
     var listItemNode = ListItemNode.unordered(
-      id: DocumentEditor.createNodeId(),
+      id: Editor.createNodeId(),
       text: AttributedText(
-          text: '无序列表',
-          spans: AttributedSpans(attributions: [
+          '无序列表',
+          AttributedSpans(attributions: [
             const SpanMarker(
-                attribution: boldAttribution,
+                attribution: boldAttribution, offset: 0, markerType: SpanMarkerType.start),
+            const SpanMarker(
+                attribution: boldAttribution, offset: 3, markerType: SpanMarkerType.end),
+            const SpanMarker(
+                attribution: LinkAttribution("www.baidu.com"),
                 offset: 0,
                 markerType: SpanMarkerType.start),
             const SpanMarker(
-                attribution: boldAttribution,
-                offset: 3,
-                markerType: SpanMarkerType.end),
-            SpanMarker(
-                attribution: LinkAttribution(url: Uri.parse("www.baidu.com")),
-                offset: 0,
-                markerType: SpanMarkerType.start),
-            SpanMarker(
-                attribution: LinkAttribution(url: Uri.parse("www.baidu.com")),
+                attribution: LinkAttribution("www.baidu.com"),
                 offset: 3,
                 markerType: SpanMarkerType.end),
           ])),
@@ -177,8 +164,7 @@ void main() {
   });
 
   test("HorizontalRuleNodeSerializeParser", () {
-    var horizontalRuleNode =
-    HorizontalRuleNode(id: DocumentEditor.createNodeId());
+    var horizontalRuleNode = HorizontalRuleNode(id: Editor.createNodeId());
     var json = horizontalRuleNode.toJson();
     assert(json != null);
     var node = DocumentNodeJson.fromJson(json!);
@@ -209,25 +195,21 @@ void main() {
 
   test("超链接属性测试", () {
     var paragraphNode = ParagraphNode(
-      id: DocumentEditor.createNodeId(),
-      metadata: {'blockType': blockquoteAttribution},
+      id: Editor.createNodeId(),
+      metadata: const {'blockType': blockquoteAttribution},
       text: AttributedText(
-          text: "加粗超链接文本",
-          spans: AttributedSpans(attributions: [
+          "加粗超链接文本",
+          AttributedSpans(attributions: [
             const SpanMarker(
-                attribution: boldAttribution,
+                attribution: boldAttribution, offset: 0, markerType: SpanMarkerType.start),
+            const SpanMarker(
+                attribution: boldAttribution, offset: 6, markerType: SpanMarkerType.end),
+            const SpanMarker(
+                attribution: LinkAttribution("www.baidu.com"),
                 offset: 0,
                 markerType: SpanMarkerType.start),
             const SpanMarker(
-                attribution: boldAttribution,
-                offset: 6,
-                markerType: SpanMarkerType.end),
-            SpanMarker(
-                attribution: LinkAttribution(url: Uri.parse("www.baidu.com")),
-                offset: 0,
-                markerType: SpanMarkerType.start),
-            SpanMarker(
-                attribution: LinkAttribution(url: Uri.parse("www.baidu.com")),
+                attribution: LinkAttribution("www.baidu.com"),
                 offset: 6,
                 markerType: SpanMarkerType.end),
           ])),
@@ -242,43 +224,26 @@ void main() {
 
   test("ParagraphNode convert test", () {
     var paragraphNode = ParagraphNode(
-      id: DocumentEditor.createNodeId(),
-      metadata: {'blockType': blockquoteAttribution},
+      id: Editor.createNodeId(),
+      metadata: const {'blockType': blockquoteAttribution},
       text: AttributedText(
-          text: "加粗文本，斜体文本，删除文本,下划线文本.注释块类型",
-          spans: AttributedSpans(attributions: const [
+          "加粗文本，斜体文本，删除文本,下划线文本.注释块类型",
+          AttributedSpans(attributions: const [
+            SpanMarker(attribution: boldAttribution, offset: 0, markerType: SpanMarkerType.start),
+            SpanMarker(attribution: boldAttribution, offset: 3, markerType: SpanMarkerType.end),
             SpanMarker(
-                attribution: boldAttribution,
-                offset: 0,
-                markerType: SpanMarkerType.start),
-            SpanMarker(
-                attribution: boldAttribution,
-                offset: 3,
-                markerType: SpanMarkerType.end),
-            SpanMarker(
-                attribution: italicsAttribution,
-                offset: 5,
-                markerType: SpanMarkerType.start),
-            SpanMarker(
-                attribution: italicsAttribution,
-                offset: 8,
-                markerType: SpanMarkerType.end),
+                attribution: italicsAttribution, offset: 5, markerType: SpanMarkerType.start),
+            SpanMarker(attribution: italicsAttribution, offset: 8, markerType: SpanMarkerType.end),
             SpanMarker(
                 attribution: strikethroughAttribution,
                 offset: 10,
                 markerType: SpanMarkerType.start),
             SpanMarker(
-                attribution: strikethroughAttribution,
-                offset: 13,
-                markerType: SpanMarkerType.end),
+                attribution: strikethroughAttribution, offset: 13, markerType: SpanMarkerType.end),
             SpanMarker(
-                attribution: underlineAttribution,
-                offset: 14,
-                markerType: SpanMarkerType.start),
+                attribution: underlineAttribution, offset: 14, markerType: SpanMarkerType.start),
             SpanMarker(
-                attribution: underlineAttribution,
-                offset: 19,
-                markerType: SpanMarkerType.end),
+                attribution: underlineAttribution, offset: 19, markerType: SpanMarkerType.end),
           ])),
     );
 
@@ -312,9 +277,7 @@ class _ColorAttribution extends Attribution {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is _ColorAttribution &&
-              runtimeType == other.runtimeType &&
-              color == other.color;
+      other is _ColorAttribution && runtimeType == other.runtimeType && color == other.color;
 
   @override
   int get hashCode => color.hashCode;

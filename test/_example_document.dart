@@ -14,141 +14,121 @@ Document createInitialDocument() {
         ).toMetadata(),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text: 'Welcome to Super Editor 💙 🚀',
+          'Welcome to Super Editor 💙 🚀',
         ),
-        metadata: {
+        metadata: const {
           'blockType': header1Attribution,
         },
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text:
-              "Super Editor is a toolkit to help you build document editors, document layouts, text fields, and more.",
+          "Super Editor is a toolkit to help you build document editors, document layouts, text fields, and more.",
         ),
       ),
-      HorizontalRuleNode(id: DocumentEditor.createNodeId()),
+      HorizontalRuleNode(id: Editor.createNodeId()),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text: 'Ready-made solutions 📦',
+          'Ready-made solutions 📦',
         ),
-        metadata: {
+        metadata: const {
           'blockType': header2Attribution,
         },
       ),
       ListItemNode.unordered(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text:
-              'SuperEditor is a ready-made, configurable document editing experience.',
+          'SuperEditor is a ready-made, configurable document editing experience.',
         ),
       ),
       ListItemNode.unordered(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text: 'SuperTextField is a ready-made, configurable text field.',
+          'SuperTextField is a ready-made, configurable text field.',
         ),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text: 'Quickstart 🚀',
+          'Quickstart 🚀',
         ),
-        metadata: {
+        metadata: const {
           'blockType': header2Attribution,
         },
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-            text:
-                'To get started with your own editing experience, take the following steps:'),
+            'To get started with your own editing experience, take the following steps:'),
       ),
       TaskNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         isComplete: false,
         text: AttributedText(
-          text:
-              'Create and configure your document, for example, by creating a new MutableDocument.',
+          'Create and configure your document, for example, by creating a new MutableDocument.',
         ),
       ),
       TaskNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         isComplete: false,
         text: AttributedText(
-          text:
-              "If you want programmatic control over the user's selection and styles, create a DocumentComposer.",
+          "If you want programmatic control over the user's selection and styles, create a DocumentComposer.",
         ),
       ),
       TaskNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         isComplete: false,
         text: AttributedText(
-          text:
-              "Build a SuperEditor widget in your widget tree, configured with your Document and (optionally) your DocumentComposer.",
+          "Build a SuperEditor widget in your widget tree, configured with your Document and (optionally) your DocumentComposer.",
         ),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text:
-              "Now, you're off to the races! SuperEditor renders your document, and lets you select, insert, and delete content.",
+          "Now, you're off to the races! SuperEditor renders your document, and lets you select, insert, and delete content.",
         ),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text: 'Explore the toolkit 🔎',
+          'Explore the toolkit 🔎',
         ),
-        metadata: {
+        metadata: const {
           'blockType': header2Attribution,
         },
       ),
       ListItemNode.unordered(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text:
-              "Use MutableDocument as an in-memory representation of a document.",
+          "Use MutableDocument as an in-memory representation of a document.",
         ),
       ),
       ListItemNode.unordered(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text:
-              "Implement your own document data store by implementing the Document api.",
+          "Implement your own document data store by implementing the Document api.",
         ),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-          text:
-              "We hope you enjoy using Super Editor. Let us know what you're building, and please file issues for any bugs that you find.",
+          "We hope you enjoy using Super Editor. Let us know what you're building, and please file issues for any bugs that you find.",
         ),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-            text: "加粗文本，斜体文本，删除文本,下划线文本..普通文本",
-            spans: AttributedSpans(attributions: const [
+            "加粗文本，斜体文本，删除文本,下划线文本..普通文本",
+            AttributedSpans(attributions: const [
+              SpanMarker(attribution: boldAttribution, offset: 0, markerType: SpanMarkerType.start),
+              SpanMarker(attribution: boldAttribution, offset: 3, markerType: SpanMarkerType.end),
               SpanMarker(
-                  attribution: boldAttribution,
-                  offset: 0,
-                  markerType: SpanMarkerType.start),
+                  attribution: italicsAttribution, offset: 5, markerType: SpanMarkerType.start),
               SpanMarker(
-                  attribution: boldAttribution,
-                  offset: 3,
-                  markerType: SpanMarkerType.end),
-              SpanMarker(
-                  attribution: italicsAttribution,
-                  offset: 5,
-                  markerType: SpanMarkerType.start),
-              SpanMarker(
-                  attribution: italicsAttribution,
-                  offset: 8,
-                  markerType: SpanMarkerType.end),
+                  attribution: italicsAttribution, offset: 8, markerType: SpanMarkerType.end),
               SpanMarker(
                   attribution: strikethroughAttribution,
                   offset: 10,
@@ -158,37 +138,23 @@ Document createInitialDocument() {
                   offset: 13,
                   markerType: SpanMarkerType.end),
               SpanMarker(
-                  attribution: underlineAttribution,
-                  offset: 14,
-                  markerType: SpanMarkerType.start),
+                  attribution: underlineAttribution, offset: 14, markerType: SpanMarkerType.start),
               SpanMarker(
-                  attribution: underlineAttribution,
-                  offset: 19,
-                  markerType: SpanMarkerType.end),
+                  attribution: underlineAttribution, offset: 19, markerType: SpanMarkerType.end),
             ])),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
-        metadata: {'blockType': blockquoteAttribution},
+        id: Editor.createNodeId(),
+        metadata: const {'blockType': blockquoteAttribution},
         text: AttributedText(
-            text: "加粗文本，斜体文本，删除文本,下划线文本.注释块类型",
-            spans: AttributedSpans(attributions: const [
+            "加粗文本，斜体文本，删除文本,下划线文本.注释块类型",
+            AttributedSpans(attributions: const [
+              SpanMarker(attribution: boldAttribution, offset: 0, markerType: SpanMarkerType.start),
+              SpanMarker(attribution: boldAttribution, offset: 3, markerType: SpanMarkerType.end),
               SpanMarker(
-                  attribution: boldAttribution,
-                  offset: 0,
-                  markerType: SpanMarkerType.start),
+                  attribution: italicsAttribution, offset: 5, markerType: SpanMarkerType.start),
               SpanMarker(
-                  attribution: boldAttribution,
-                  offset: 3,
-                  markerType: SpanMarkerType.end),
-              SpanMarker(
-                  attribution: italicsAttribution,
-                  offset: 5,
-                  markerType: SpanMarkerType.start),
-              SpanMarker(
-                  attribution: italicsAttribution,
-                  offset: 8,
-                  markerType: SpanMarkerType.end),
+                  attribution: italicsAttribution, offset: 8, markerType: SpanMarkerType.end),
               SpanMarker(
                   attribution: strikethroughAttribution,
                   offset: 10,
@@ -198,28 +164,22 @@ Document createInitialDocument() {
                   offset: 13,
                   markerType: SpanMarkerType.end),
               SpanMarker(
-                  attribution: underlineAttribution,
-                  offset: 14,
-                  markerType: SpanMarkerType.start),
+                  attribution: underlineAttribution, offset: 14, markerType: SpanMarkerType.start),
               SpanMarker(
-                  attribution: underlineAttribution,
-                  offset: 19,
-                  markerType: SpanMarkerType.end),
+                  attribution: underlineAttribution, offset: 19, markerType: SpanMarkerType.end),
             ])),
       ),
       ParagraphNode(
-        id: DocumentEditor.createNodeId(),
+        id: Editor.createNodeId(),
         text: AttributedText(
-            text: "Link Url",
-            spans: AttributedSpans(attributions: [
+            "Link Url",
+            AttributedSpans(attributions: const [
               SpanMarker(
-                  attribution:
-                      LinkAttribution(url: Uri.parse("www.google.com")),
+                  attribution: LinkAttribution("www.google.com"),
                   offset: 0,
                   markerType: SpanMarkerType.start),
               SpanMarker(
-                  attribution:
-                      LinkAttribution(url: Uri.parse("www.google.com")),
+                  attribution: LinkAttribution("www.google.com"),
                   offset: 7,
                   markerType: SpanMarkerType.end),
             ])),

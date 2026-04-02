@@ -59,7 +59,8 @@ class ImageNodeSerializeParser extends BaseDocumentJsonSerialize<ImageNode> {
 class HorizontalRuleNodeSerializeParser extends BaseDocumentJsonSerialize<HorizontalRuleNode> {
   @override
   HorizontalRuleNode? deserializeNode(Map<String, dynamic> map) {
-    return HorizontalRuleNode(id: map[keyNodeId] ?? nodeId)..metadata = deserializeMetadata(map[keyMetadata]);
+    return HorizontalRuleNode(
+        id: map[keyNodeId] ?? nodeId, metadata: deserializeMetadata(map[keyMetadata]));
   }
 
   @override
@@ -89,7 +90,11 @@ class ListItemNodeSerializeParser extends BaseDocumentJsonSerialize<ListItemNode
 
   @override
   Map<String, dynamic>? serializeNode(ListItemNode node) {
-    return {keyNodeId: node.id, keyListType: node.type.name, keyAttributedText: serializeAttrText(node.text)};
+    return {
+      keyNodeId: node.id,
+      keyListType: node.type.name,
+      keyAttributedText: serializeAttrText(node.text)
+    };
   }
 }
 

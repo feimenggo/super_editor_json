@@ -12,7 +12,7 @@ List<dynamic> documentSerialize(
   List<AbsDocumentSerialize> customNodeSerializeParser = const [],
   AttributionSerializeBuilder? customAttributionSerializeBuilder,
 }) {
-  var nodes = document.nodes;
+  var nodes = document;
   List<dynamic> allNodes = [];
 
   for (var node in nodes) {
@@ -125,7 +125,7 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
   //endregion
 
   ///快速创建id,Quickly create IDs
-  get nodeId => DocumentEditor.createNodeId();
+  get nodeId => Editor.createNodeId();
 
   ///设置全局自定义[Attribution]属性序列化构建器
   ///如果你为节点自定义了 [Attribution] , 那么就需要自己配置序列化
@@ -224,11 +224,11 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
   AttributedText deserializeAttrText(Map<String, dynamic>? map,
       {AttributionDeserializeBuilder? deserializeAttributionBuilder}) {
     if (map == null) {
-      return AttributedText(text: '');
+      return AttributedText('');
     }
     return AttributedText(
-      text: map[keyText] ?? '',
-      spans: deserializeSpans(
+      map[keyText] ?? '',
+      deserializeSpans(
         map[keySpans] ?? [],
         deserializeAttributionBuilder: deserializeAttributionBuilder,
       ),
@@ -321,7 +321,8 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
       } else {
         type = SpanMarkerType.end;
       }
-      markers.add(SpanMarker(attribution: attribution, offset: marker[keySpanOffset], markerType: type));
+      markers.add(
+          SpanMarker(attribution: attribution, offset: marker[keySpanOffset], markerType: type));
     }
     return AttributedSpans(attributions: markers);
   }
@@ -398,7 +399,8 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
   Attribution? defaultAttributionDeserializeBuilder(Map<String, dynamic> map) {
     var attrId = map[keyAttributionId];
     if (attrId == "link") {
-      return LinkAttribution(url: Uri.parse(map[keyAttributionLink]));
+      final url = map[keyAttributionLink];
+      return LinkAttribution(url, Uri.parse(map[keyAttributionLink]));
     } else {
       ///为什么这么做呢，为了防止自定义的Attribution
       for (var value in _allNameAttribution) {

@@ -115,8 +115,8 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
   final String keyAttributedText = "attributedText";
   final String keyAttribution = "attribution";
   final String keyAttributionId = "id";
-  final String keyAttributionName = "name";
   final String keyAttributionLink = "link";
+  final String keyAttributionColor = "color";
   final String keyImageAltText = "altText";
   final String keyImageUrl = "url";
   final String keyListType = "listType";
@@ -388,7 +388,11 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
     } else if (attribution is NamedAttribution) {
       return {
         keyAttributionId: attribution.id,
-        keyAttributionName: attribution.name,
+      };
+    } else if (attribution is ColorAttribution) {
+      return {
+        keyAttributionId: attribution.id,
+        keyAttributionColor: attribution.color.toARGB32(),
       };
     }
     return null;
@@ -397,10 +401,11 @@ abstract class BaseDocumentJsonSerialize<T extends DocumentNode> implements AbsD
   ///默认属性反序列化构建器
   ///see [defaultAttributionSerializeBuilder]
   Attribution? defaultAttributionDeserializeBuilder(Map<String, dynamic> map) {
-    var attrId = map[keyAttributionId];
-    if (attrId == "link") {
-      final url = map[keyAttributionLink];
-      return LinkAttribution(url, Uri.parse(map[keyAttributionLink]));
+    final attrId = map[keyAttributionId];
+    if (attrId == keyAttributionLink) {
+      return LinkAttribution(map[keyAttributionLink]);
+    } else if (attrId == keyAttributionColor) {
+      return ColorAttribution(Color(map[keyAttributionColor]));
     } else {
       ///为什么这么做呢，为了防止自定义的Attribution
       for (var value in _allNameAttribution) {
